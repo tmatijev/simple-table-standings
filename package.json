@@ -2,6 +2,10 @@
   "name": "simple-table-standings",
   "version": "1.0.0",
   "description": "Simple Table Standings Calculation",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmatijev/simple-table-standings.git"
+  },
   "main": "simple-table-standings.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
