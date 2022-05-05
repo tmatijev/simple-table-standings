@@ -84,7 +84,7 @@ const standings = teamsMatches(teams);
 
 Will return the following output:
 
-```json
+```
 [
   {
     name: 'Hajduk',
