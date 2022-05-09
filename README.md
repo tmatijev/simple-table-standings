@@ -1,5 +1,7 @@
 # Simple table standings
 
+[![npm status](https://img.shields.io/badge/npm-v1.0.3-brightgreen.svg)](https://www.npmjs.org/package/simple-table-standings)
+
 ### Usage
 
 Simply pass the params for the teams and legs:
@@ -17,10 +19,10 @@ const teamsMatches = [
       ],
       rijeka: [
         { isHomeMatch: true, goalsFor: 1, goalsAgainst: 3 },
-        { isHomeMatch: false, goalsFor: 3, goalsAgainst: 3 },
+        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 3 },
       ],
       osijek: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 2 },
+        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 1 },
         { isHomeMatch: false, goalsFor: 1, goalsAgainst: 1 },
       ],
     },
@@ -33,13 +35,12 @@ const teamsMatches = [
         { isHomeMatch: true, goalsAgainst: 2, goalsFor: 0 },
       ],
       rijeka: [
-        // { isHomeMatch: true, goalsFor: 3, goalsAgainst: 3 },
-        { isHomeMatch: true, goalsFor: 2, goalsAgainst: 3 },
+        { isHomeMatch: true, goalsFor: 3, goalsAgainst: 3 },
         { isHomeMatch: false, goalsFor: 2, goalsAgainst: 1 },
       ],
       osijek: [
         { isHomeMatch: true, goalsFor: 0, goalsAgainst: 0 },
-        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 0 },
+        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 2 },
       ],
     },
   },
@@ -52,11 +53,11 @@ const teamsMatches = [
       ],
       rijeka: [
         { isHomeMatch: true, goalsFor: 1, goalsAgainst: 1 },
-        { isHomeMatch: false, goalsFor: 0, goalsAgainst: 0 },
+        { isHomeMatch: false, goalsFor: 1, goalsAgainst: 0 },
       ],
       hajduk: [
         { isHomeMatch: true, goalsFor: 1, goalsAgainst: 1 },
-        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 1 },
+        { isHomeMatch: false, goalsFor: 1, goalsAgainst: 1 },
       ],
     },
   },
@@ -68,11 +69,11 @@ const teamsMatches = [
         { isHomeMatch: false, goalsFor: 3, goalsAgainst: 3 },
       ],
       hajduk: [
-        { isHomeMatch: true, goalsFor: 2, goalsAgainst: 3 },
+        { isHomeMatch: true, goalsFor: 3, goalsAgainst: 3 },
         { isHomeMatch: false, goalsFor: 3, goalsAgainst: 1 },
       ],
       osijek: [
-        { isHomeMatch: true, goalsFor: 0, goalsAgainst: 0 },
+        { isHomeMatch: true, goalsFor: 0, goalsAgainst: 1 },
         { isHomeMatch: false, goalsFor: 0, goalsAgainst: 1 },
       ],
     },
@@ -88,107 +89,39 @@ Will return the following output:
 [
   {
     name: 'Hajduk',
-    matches: {
-      dinamo: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 0 },
-        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 0 }
-      ],
-      rijeka: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 3 },
-        { isHomeMatch: false, goalsFor: 3, goalsAgainst: 3 }
-      ],
-      osijek: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 2 },
-        { isHomeMatch: false, goalsFor: 1, goalsAgainst: 1 }
-      ]
-    },
+    matches: { dinamo: [Array], rijeka: [Array], osijek: [Array] },
     points: 8,
-    goalsFor: 9,
-    golasAgainst: 9,
+    goalsFor: 8,
+    golasAgainst: 8,
     goalDiff: 0,
-    records: {
-      dinamo: { points: 2, goals: 3 },
-      rijeka: { points: -1, goals: -2 },
-      osijek: { points: -1, goals: -1 }
-    }
+    records: { dinamo: [Object], rijeka: [Object], osijek: [Object] }
   },
   {
     name: 'Osijek',
-    matches: {
-      dinamo: [
-        { isHomeMatch: true, goalsFor: 2, goalsAgainst: 2 },
-        { isHomeMatch: false, goalsFor: 0, goalsAgainst: 0 }
-      ],
-      rijeka: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 1 },
-        { isHomeMatch: false, goalsFor: 0, goalsAgainst: 0 }
-      ],
-      hajduk: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 1 },
-        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 1 }
-      ]
-    },
+    matches: { dinamo: [Array], rijeka: [Array], hajduk: [Array] },
     points: 8,
     goalsFor: 6,
     golasAgainst: 5,
     goalDiff: 0,
-    records: {
-      dinamo: { points: 0, goals: 0 },
-      rijeka: { points: 0, goals: 0 },
-      hajduk: { points: 1, goals: 1 }
-    }
+    records: { dinamo: [Object], rijeka: [Object], hajduk: [Object] }
   },
   {
     name: 'Dinamo',
-    matches: {
-      hajduk: [
-        { isHomeMatch: false, goalsAgainst: 1, goalsFor: 0 },
-        { isHomeMatch: true, goalsAgainst: 2, goalsFor: 0 }
-      ],
-      rijeka: [
-        { isHomeMatch: true, goalsFor: 2, goalsAgainst: 3 },
-        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 1 }
-      ],
-      osijek: [
-        { isHomeMatch: true, goalsFor: 0, goalsAgainst: 0 },
-        { isHomeMatch: false, goalsFor: 2, goalsAgainst: 0 }
-      ]
-    },
-    points: 7,
-    goalsFor: 6,
-    golasAgainst: 7,
+    matches: { hajduk: [Array], rijeka: [Array], osijek: [Array] },
+    points: 6,
+    goalsFor: 7,
+    golasAgainst: 9,
     goalDiff: 0,
-    records: {
-      hajduk: { points: -2, goals: -3 },
-      rijeka: { points: 0, goals: 0 },
-      osijek: { points: 1, goals: 2 }
-    }
+    records: { hajduk: [Object], rijeka: [Object], osijek: [Object] }
   },
   {
     name: 'Rijeka',
-    matches: {
-      dinamo: [
-        { isHomeMatch: true, goalsFor: 1, goalsAgainst: 2 },
-        { isHomeMatch: false, goalsFor: 3, goalsAgainst: 3 }
-      ],
-      hajduk: [
-        { isHomeMatch: true, goalsFor: 2, goalsAgainst: 3 },
-        { isHomeMatch: false, goalsFor: 3, goalsAgainst: 1 }
-      ],
-      osijek: [
-        { isHomeMatch: true, goalsFor: 0, goalsAgainst: 0 },
-        { isHomeMatch: false, goalsFor: 0, goalsAgainst: 1 }
-      ]
-    },
+    matches: { dinamo: [Array], hajduk: [Array], osijek: [Array] },
     points: 5,
-    goalsFor: 9,
-    golasAgainst: 10,
+    goalsFor: 10,
+    golasAgainst: 11,
     goalDiff: 0,
-    records: {
-      dinamo: { points: -1, goals: -1 },
-      hajduk: { points: 0, goals: 1 },
-      osijek: { points: -1, goals: -1 }
-    }
+    records: { dinamo: [Object], hajduk: [Object], osijek: [Object] }
   }
 ]
 ```
