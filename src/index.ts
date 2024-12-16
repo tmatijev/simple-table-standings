@@ -19,24 +19,33 @@ function compareTwoTeams(
   const firstTeamBetter: ExtendedTeam[] = [firstTeam, secondTeam];
   const secondTeamBetter: ExtendedTeam[] = [secondTeam, firstTeam];
 
+  // 1. Check head-to-head matches
   const firstTeamVsSecond = matches[secondTeamName.toLowerCase()];
-
-  let firstTeamVsSecondRatio = 0;
-  let firstTeamVsSecondGoalDiff = 0;
+  let headToHeadPoints = 0;
 
   firstTeamVsSecond.forEach(({ goalsFor, goalsAgainst }) => {
-    firstTeamVsSecondRatio += calculateVersusRatio(goalsFor, goalsAgainst);
-    firstTeamVsSecondGoalDiff += goalsFor - goalsAgainst;
+    if (goalsFor > goalsAgainst) headToHeadPoints += 3;
+    else if (goalsFor === goalsAgainst) headToHeadPoints += 1;
   });
 
-  if (firstTeamVsSecondRatio > 0) return firstTeamBetter;
-  if (firstTeamVsSecondRatio < 0) return secondTeamBetter;
-  if (firstTeamVsSecondGoalDiff > 0) return firstTeamBetter;
-  if (firstTeamVsSecondGoalDiff < 0) return secondTeamBetter;
+  const secondTeamVsFirst = secondTeam.matches[firstTeam.name.toLowerCase()];
+  secondTeamVsFirst.forEach(({ goalsFor, goalsAgainst }) => {
+    if (goalsFor > goalsAgainst) headToHeadPoints -= 3;
+    else if (goalsFor === goalsAgainst) headToHeadPoints -= 1;
+  });
+
+  if (headToHeadPoints > 0) return firstTeamBetter;
+  if (headToHeadPoints < 0) return secondTeamBetter;
+
+  // 2. Goal difference
   if (firstTeam.goalDiff > secondTeam.goalDiff) return firstTeamBetter;
   if (firstTeam.goalDiff < secondTeam.goalDiff) return secondTeamBetter;
+
+  // 3. Goals scored
   if (firstTeam.goalsFor > secondTeam.goalsFor) return firstTeamBetter;
-  return secondTeamBetter;
+  if (firstTeam.goalsFor < secondTeam.goalsFor) return secondTeamBetter;
+
+  return firstTeamBetter; // if everything is equal, keep original order
 }
 
 function groupByPointsAndSort(teams: ExtendedTeam[]): ExtendedTeam[] {

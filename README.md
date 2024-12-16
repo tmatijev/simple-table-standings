@@ -162,11 +162,16 @@ type ExtendedTeam = Team & {
 - Draw: 1 point
 - Loss: 0 points
 
-Teams are sorted by:
+Teams are sorted by (in order of priority):
 1. Total points
-2. Head-to-head records
-3. Goal difference
-4. Goals scored
+2. Head-to-head matches (points earned in matches between tied teams)
+3. Overall goal difference
+4. Total goals scored
+
+For example, if two teams have the same points:
+- First, compare their head-to-head matches
+- If still tied, compare their goal differences
+- If still tied, compare total goals scored
 
 ## Contributing
 

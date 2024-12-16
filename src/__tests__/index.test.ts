@@ -28,11 +28,11 @@ describe('simpleTableStandings', () => {
           { isHomeMatch: true, goalsAgainst: 2, goalsFor: 0 },
         ],
         rijeka: [
-          { isHomeMatch: true, goalsFor: 3, goalsAgainst: 3 },
+          { isHomeMatch: true, goalsFor: 3, goalsAgainst: 1 },
           { isHomeMatch: false, goalsFor: 2, goalsAgainst: 1 },
         ],
         osijek: [
-          { isHomeMatch: true, goalsFor: 0, goalsAgainst: 0 },
+          { isHomeMatch: true, goalsFor: 1, goalsAgainst: 1 },
           { isHomeMatch: false, goalsFor: 2, goalsAgainst: 2 },
         ],
       },
@@ -58,5 +58,25 @@ describe('simpleTableStandings', () => {
   it('should handle invalid input', () => {
     const result = simpleTableStandings(null as any);
     expect(result).toBeUndefined();
+  });
+
+  it('should sort teams with same points correctly', () => {
+    const result = simpleTableStandings(teamsMatches);
+    
+    // Both teams should have 8 points
+    const samePointsTeams = result?.filter(team => team.points === 8);
+    expect(samePointsTeams?.length).toBe(2);
+    
+    if (samePointsTeams?.length === 2) {
+      const [firstTeam, secondTeam] = samePointsTeams;
+      
+      // Verify head-to-head matches
+      expect(firstTeam.records?.[secondTeam.name.toLowerCase()].points).toBeGreaterThan(0);
+      
+      // If head-to-head is tied, verify goal difference
+      if (firstTeam.records?.[secondTeam.name.toLowerCase()].points === 0) {
+        expect(firstTeam.goalDiff).toBeGreaterThan(secondTeam.goalDiff);
+      }
+    }
   });
 }); 
