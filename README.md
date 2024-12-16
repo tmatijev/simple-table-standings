@@ -1,12 +1,32 @@
-# Simple table standings
+# Simple Table Standings
 
-[![npm status](https://img.shields.io/badge/npm-v1.0.3-brightgreen.svg)](https://www.npmjs.org/package/simple-table-standings)
+[![npm version](https://img.shields.io/npm/v/simple-table-standings.svg)](https://www.npmjs.com/package/simple-table-standings)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
 
-### Usage
+A lightweight TypeScript library for calculating sports standings tables with head-to-head records.
 
-Simply pass the params for the teams and legs:
+## Features
 
-```js
+- 🎯 Accurate points calculation
+- 🔄 Head-to-head records
+- 📊 Goal difference tracking
+- 💪 TypeScript support
+- 0️⃣ Zero dependencies
+
+## Installation
+
+```bash
+npm install simple-table-standings
+# or
+yarn add simple-table-standings
+# or
+pnpm add simple-table-standings
+```
+
+## Usage
+
+```typescript
 import simpleTableStandings from "simple-table-standings";
 
 const teamsMatches = [
@@ -80,48 +100,79 @@ const teamsMatches = [
   },
 ];
 
-const standings = teamsMatches(teams);
+const standings = simpleTableStandings(teamsMatches);
 ```
 
-Will return the following output:
+### Input Type
 
+```typescript
+type Match = {
+  isHomeMatch: boolean;
+  goalsFor: number;
+  goalsAgainst: number;
+};
+
+type Team = {
+  name: string;
+  matches: {
+    [opponent: string]: Match[];
+  };
+};
 ```
+
+### Output Type
+
+```typescript
+type ExtendedTeam = Team & {
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDiff: number;
+  records?: {
+    [opponent: string]: {
+      points: number;
+      goals: number;
+    };
+  };
+};
+```
+
+### Example Output
+
+```json
 [
   {
-    name: 'Hajduk',
-    matches: { dinamo: [Array], rijeka: [Array], osijek: [Array] },
-    points: 8,
-    goalsFor: 8,
-    golasAgainst: 8,
-    goalDiff: 0,
-    records: { dinamo: [Object], rijeka: [Object], osijek: [Object] }
-  },
-  {
-    name: 'Osijek',
-    matches: { dinamo: [Array], rijeka: [Array], hajduk: [Array] },
-    points: 8,
-    goalsFor: 6,
-    golasAgainst: 5,
-    goalDiff: 0,
-    records: { dinamo: [Object], rijeka: [Object], hajduk: [Object] }
-  },
-  {
-    name: 'Dinamo',
-    matches: { hajduk: [Array], rijeka: [Array], osijek: [Array] },
-    points: 6,
-    goalsFor: 7,
-    golasAgainst: 9,
-    goalDiff: 0,
-    records: { hajduk: [Object], rijeka: [Object], osijek: [Object] }
-  },
-  {
-    name: 'Rijeka',
-    matches: { dinamo: [Array], hajduk: [Array], osijek: [Array] },
-    points: 5,
-    goalsFor: 10,
-    golasAgainst: 11,
-    goalDiff: 0,
-    records: { dinamo: [Object], hajduk: [Object], osijek: [Object] }
+    "name": "Hajduk",
+    "points": 8,
+    "goalsFor": 8,
+    "goalsAgainst": 8,
+    "goalDiff": 0,
+    "records": {
+      "dinamo": { "points": 2, "goals": 3 },
+      "rijeka": { "points": -1, "goals": -3 }
+    }
   }
+  // ... more teams
 ]
+```
+
+## Rules
+
+- Win: 3 points
+- Draw: 1 point
+- Loss: 0 points
+
+Teams are sorted by:
+1. Total points
+2. Head-to-head records
+3. Goal difference
+4. Goals scored
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[ISC](https://choosealicense.com/licenses/isc/)
 ```
